@@ -4,12 +4,13 @@
 }
 .score {
   position: absolute;
-  left: 74vh;
+  left: calc(50% - 12.2vh);
   font-size: 19vh;
   color: white;
 }
 .field {
   height: 97vh;
+  width: 100%;
   border-radius: 10px;
 }
 .ball {
