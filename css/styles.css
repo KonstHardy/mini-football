@@ -2,9 +2,14 @@
   position: relative;
   margin: 15px 10px 0;
 }
+.score {
+  position: absolute;
+  left: 74vh;
+  font-size: 19vh;
+  color: white;
+}
 .field {
   height: 97vh;
-  width: 100%;
   border-radius: 10px;
 }
 .ball {
@@ -12,5 +17,5 @@
   cursor: pointer;
   top: 0vh;
   left: 0vh;
-  height: 8vh;
+  height: 9vh;
 }

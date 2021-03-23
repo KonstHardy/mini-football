@@ -1,24 +1,30 @@
 var ball = $(".ball");
 var field = $(".field");
+var score = document.getElementById("score");
+
+//Initial game score;
+var leftPlayer = 0;
+var rightPlayer = 0;
+
+//Player's starting side counter;
+var i = 0;
+
+//Field coordinates;
+var fieldTop = Math.floor(field.offset().top + ball.height() / 2);
+var fieldBottom = Math.floor(field.height() - fieldTop - ball.height() / 2);
 
 ball.on("click", function () {
-  //Field coordinates;
-  var fieldTop = Math.floor(field.offset().top + ball.height() / 2);
-  var fieldBottom = Math.floor(field.height() - fieldTop - ball.height() / 2);
-
   //Generation of random coordinates along the 0Y axis;
-  function random() {
-    var rand = Math.floor(
-      fieldTop + Math.random() * (fieldBottom + 1 - fieldTop)
-    );
-    return rand;
-  }
+  var randomY = Math.floor(
+    fieldTop + Math.random() * (fieldBottom + 1 - fieldTop)
+  );
 
-  var randomCordsY = random();
+  //Player side change;
+  i++;
 
   //Coordinates to move the ball;
   var ballCoords = {
-    top: randomCordsY,
+    top: randomY,
     left: field.width() - ball.width(),
   };
 
@@ -47,22 +53,31 @@ ball.on("click", function () {
       goal
     );
   }
-});
 
-//Hitting the ball into the gate;
-function goal() {
-  //Gate height (relative to the field);
-  var gateHeight = Math.floor(field.height() / 2 - field.height() * 0.3);
-  //Coordinates of the top of the gate (relative to the field);
-  var gateTop = Math.floor(field.height() / 2 - (field.height() / 2) * 0.25);
-  //Coordinates of the bottom of the gate (relative to the field);
-  var gateBottom = gateTop + gateHeight;
+  //Hitting the ball into the gate;
+  function goal() {
+    //Gate height (relative to the field);
+    var gateHeight = Math.floor(field.height() / 2 - field.height() * 0.3);
+    //Coordinates of the top of the gate (relative to the field);
+    var gateTop = Math.floor(field.height() / 2 - (field.height() / 2) * 0.25);
+    //Coordinates of the bottom of the gate (relative to the field);
+    var gateBottom = gateTop + gateHeight;
+    //Coordinates of the ball (relative to the field);
+    var ballСoordinates = Math.floor(ball.offset().top);
 
-  //Coordinates of the ball (relative to the field);
-  var ballСoordinates = Math.floor(ball.offset().top);
-
-  //If a goal, then we show ("Goooool !!!");
-  if (ballСoordinates > gateTop && ballСoordinates < gateBottom) {
-    setTimeout(() => alert("Goooool !!!"), 100);
+    //If is a goal, then we increase the score and show ("Gooooool !!!");
+    if (ballСoordinates > gateTop && ballСoordinates < gateBottom) {
+      //A goal in the right gate;
+      if (i % 2 != 0) {
+        leftPlayer++;
+        score.innerText = leftPlayer + ":" + rightPlayer;
+      }
+      //A goal in the left gate;
+      else {
+        rightPlayer++;
+        score.innerText = leftPlayer + ":" + rightPlayer;
+      }
+      setTimeout(() => alert("Goooool !!!"));
+    }
   }
-}
+});
