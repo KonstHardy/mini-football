@@ -5,8 +5,6 @@ ball.on("click", function () {
   //Field coordinates;
   var fieldTop = Math.floor(field.offset().top + ball.height() / 2);
   var fieldBottom = Math.floor(field.height() - fieldTop - ball.height() / 2);
-  var fieldLeft = Math.floor(field.offset().left);
-  var fieldRight = Math.floor(fieldLeft + field.width());
 
   //Generation of random coordinates along the 0Y axis;
   function random() {
@@ -54,17 +52,17 @@ ball.on("click", function () {
 //Hitting the ball into the gate;
 function goal() {
   //Gate height (relative to the field);
-  var heightGate = Math.floor(field.height() / 2 - field.height() * 0.3);
+  var gateHeight = Math.floor(field.height() / 2 - field.height() * 0.3);
   //Coordinates of the top of the gate (relative to the field);
   var gateTop = Math.floor(field.height() / 2 - (field.height() / 2) * 0.25);
   //Coordinates of the bottom of the gate (relative to the field);
-  var gateBottom = gateTop + heightGate;
+  var gateBottom = gateTop + gateHeight;
 
   //Coordinates of the ball (relative to the field);
-  var posBall = Math.floor(ball.offset().top);
+  var ballСoordinates = Math.floor(ball.offset().top);
 
-  //If a goal, then we show ("Gooooooool !!!");
-  if (posBall > gateTop && posBall < gateBottom) {
-    setTimeout(() => alert("Gooooooool!!!"), 100);
+  //If a goal, then we show ("Goooool !!!");
+  if (ballСoordinates > gateTop && ballСoordinates < gateBottom) {
+    setTimeout(() => alert("Goooool !!!"), 100);
   }
 }
