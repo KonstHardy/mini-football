@@ -1,93 +1,70 @@
-// Вариант на JQuery;
+var ball = $(".ball");
+var field = $(".field");
 
-var ball = $('.ball');
-var field = $('.field');
+ball.on("click", function () {
+  //Field coordinates;
+  var fieldTop = Math.floor(field.offset().top + ball.height() / 2);
+  var fieldBottom = Math.floor(field.height() - fieldTop - ball.height() / 2);
+  var fieldLeft = Math.floor(field.offset().left);
+  var fieldRight = Math.floor(fieldLeft + field.width());
 
+  //Generation of random coordinates along the 0Y axis;
+  function random() {
+    var rand = Math.floor(
+      fieldTop + Math.random() * (fieldBottom + 1 - fieldTop)
+    );
+    return rand;
+  }
 
-//Обработчик, который отслеживает событие click;
-ball.on('click', function () {
-	
-	// Вычисляем координаты границ поля;
+  var randomCordsY = random();
 
-	// добавляем пол высоты мяча, чтобы мяч не заходил за верхний край поля;
-	var fieldTop = Math.floor(field.offset().top + ball.height()/2); 
-	// вычетаем высоту мяча (пол высоты снизу, пол высоты отнимаем из fieldTop), чтобы мяч не заходил за нижний край поля;
-	var fieldBottom = Math.floor(field.height() - fieldTop - ball.height()/2);
+  //Coordinates to move the ball;
+  var ballCoords = {
+    top: randomCordsY,
+    left: field.width() - ball.width(),
+  };
 
-	// var fieldTop = Math.floor(field.offset().top); 	
-	// var fieldBottom = Math.floor(fieldTop + field.height());
-	var fieldLeft = Math.floor(field.offset().left);
-	var fieldRight = Math.floor(fieldLeft + field.width());
+  //If the ball is on the left side of the field;
+  if (ball.css("left") == "0px") {
+    ball.animate(
+      {
+        left: ballCoords.left,
+        top: ballCoords.top,
+      },
+      600,
+      "linear",
+      goal
+    );
+  }
 
-	console.log( fieldTop, fieldBottom, fieldLeft, fieldRight); // выводим координаты поля;
-
-
-	
-	// Генерируем рандомное значения координат по оси Y (для мяча);
-	function random() {
-		var rand = Math.floor(fieldTop + Math.random() * (fieldBottom + 1 - fieldTop))
-		return rand;
-	}
-
-
-	var randomCordsY = random(); //Координата перемещениния меча по оси Y;
-	console.log(randomCordsY); // выводим координаты перемещениния меча по оси Y;
-
-
-
-	// Вычисляем координаты для перемещения мяча;
-	var ballCoords = {	
-		//Вот при таких параметах мяч перемещается строго между верхней и нижней границами поля;
-		// top: field.height() - ball.height(), // по высоте поля;
-
-		top:  randomCordsY, // по высоте поля;
-		left: field.width() - ball.width() // по ширине поля;	
-	};
-
-
-
-	// Если мяч на левой стороне поля, то переместить мяч на правую сторону;
-	if (ball.css('left') == '0px') {
-		ball.animate({
-			left: ballCoords.left,
-			top: ballCoords.top
-		}, 600, 'linear', goal);
-	} 
-	// Если мяч на правой стороне поля, то переместить мяч на левую сторону;
-	else {
-		ball.animate({
-			left: 0,
-			top: ballCoords.top
-		}, 600, 'linear', goal);
-	}
-
+  //If the ball is on the right side of the field;
+  else {
+    ball.animate(
+      {
+        left: 0,
+        top: ballCoords.top,
+      },
+      600,
+      "linear",
+      goal
+    );
+  }
 });
 
+//Hitting the ball into the gate;
+function goal() {
+  //Gate height (relative to the field);
+  var heightGate = Math.floor(field.height() / 2 - field.height() * 0.3);
+  //Coordinates of the top of the gate (relative to the field);
+  var gateTop = Math.floor(field.height() / 2 - (field.height() / 2) * 0.25);
+  //Coordinates of the bottom of the gate (relative to the field);
+  var gateBottom = gateTop + heightGate;
 
+  //Coordinates of the ball (relative to the field);
+  var posBall = Math.floor(ball.offset().top);
 
-// Функция проверки поподания мяча в ворота;
-function goal() {	
-	
-	// высота ворот (относительно поля);	
-	var heightGate = Math.floor(field.height()/2 - field.height()*0.3); 	
-	// коодринаты ворот сверху (относительно поля);
-	var posY = Math.floor(field.height()/2  - field.height()/2*0.25); 
-	// коодринаты ворот снизу (относительно поля);
-	var posY2 = posY + heightGate; 
-
-
-	console.log( 'y=[' + posY + '] y2=[' + posY2 + ']'); // выводим координаты ворот;
-	
-
-	// коодринаты мяча (относительно поля);
-	var posBall = Math.floor(ball.offset().top);	
-	console.log (posBall); // выводим координаты мяча;
-
-	
-	// если мяч находит в воротах, то выводим 'Gooooooool!!!'
-	if ( posBall > posY && posBall < posY2 ) {		
-		setTimeout(() => alert('Gooooooool!!!'), 100); // Выводим alert с небольшой задержкой, чтобы мяч не прерывал движения; 
-		// alert ('Gooooooool!!!');
-	}
-
+  //If a goal, then we show ("Gooooooool !!!");
+  if (posBall > gateTop && posBall < gateBottom) {
+    setTimeout(() => alert("Gooooooool!!!"), 100);
+  }
 }
