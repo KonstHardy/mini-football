@@ -1,6 +1,6 @@
+var score = document.getElementById("score");
 var ball = $(".ball");
 var field = $(".field");
-var score = document.getElementById("score");
 
 //Initial game score;
 var leftPlayer = 0;
@@ -14,13 +14,13 @@ var fieldTop = Math.floor(field.offset().top + ball.height() / 2);
 var fieldBottom = Math.floor(field.height() - fieldTop - ball.height() / 2);
 
 ball.on("click", function () {
+  //Player side change;
+  i++;
+
   //Generation of random coordinates along the 0Y axis;
   var randomY = Math.floor(
     fieldTop + Math.random() * (fieldBottom + 1 - fieldTop)
   );
-
-  //Player side change;
-  i++;
 
   //Coordinates to move the ball;
   var ballCoords = {
@@ -56,12 +56,14 @@ ball.on("click", function () {
 
   //Hitting the ball into the gate;
   function goal() {
-    //Gate height (relative to the field);
-    var gateHeight = Math.floor(field.height() / 2 - field.height() * 0.3);
     //Coordinates of the top of the gate (relative to the field);
-    var gateTop = Math.floor(field.height() / 2 - (field.height() / 2) * 0.25);
+    var gateTop = Math.floor(
+      field.height() / 2 - field.height() / 14 - ball.height() / 2
+    );
     //Coordinates of the bottom of the gate (relative to the field);
-    var gateBottom = gateTop + gateHeight;
+    var gateBottom = Math.floor(
+      field.height() / 2 + field.height() / 14 - ball.height() / 2
+    );
     //Coordinates of the ball (relative to the field);
     var ballСoordinates = Math.floor(ball.offset().top);
 
