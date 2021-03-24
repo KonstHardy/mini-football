@@ -70,7 +70,7 @@ ball.on("click", function () {
     //Coordinates of the ball (relative to the field);
     var ballСoordinates = Math.floor(ball.offset().top);
 
-    //If is a goal, then we increase the score and show ("Gooooool !!!");
+    //If is a goal, then we increase the score and show ("GOALLL !!!");
     if (ballСoordinates > gateTop && ballСoordinates < gateBottom) {
       //A goal in the right gate;
       if (i % 2 != 0) {
@@ -82,7 +82,7 @@ ball.on("click", function () {
         rightPlayer++;
         score.innerText = leftPlayer + ":" + rightPlayer;
       }
-      setTimeout(() => alert("Goooool !!!"));
+      setTimeout(() => alert("GOALLL !!!"));
     }
   }
 });
