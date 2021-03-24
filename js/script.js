@@ -28,16 +28,21 @@ ball.on("click", function () {
     left: field.width() - ball.width(),
   };
 
+  //Animation to move the ball;
+  var ballAnimate = {
+    duration: 600,
+    easing: "linear",
+    complete: goal,
+  };
+
   //If the ball is on the left side of the field;
   if (ball.css("left") == "0px") {
     ball.animate(
       {
-        left: ballCoords.left,
         top: ballCoords.top,
+        left: ballCoords.left,
       },
-      600,
-      "linear",
-      goal
+      ballAnimate
     );
   }
 
@@ -45,12 +50,10 @@ ball.on("click", function () {
   else {
     ball.animate(
       {
-        left: 0,
         top: ballCoords.top,
+        left: 0,
       },
-      600,
-      "linear",
-      goal
+      ballAnimate
     );
   }
 
