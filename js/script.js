@@ -1,4 +1,5 @@
 var score = document.getElementById("score");
+var goal = document.getElementById("goal");
 var ball = $(".ball");
 var field = $(".field");
 

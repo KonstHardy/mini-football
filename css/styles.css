@@ -6,10 +6,18 @@
   position: absolute;
   left: calc(50% - 12.2vh);
   font-size: 19vh;
-  color: white;
+  color: #fff;
+}
+.goal {
+  position: absolute;
+  top: 20vh;
+  left: calc(50% - 23.2vh);
+  font-size: 10vh;
+  color: #c7ab0e;
+  text-shadow: 0px 0px 15px #150000;
 }
 .field {
-  height: 97vh;
+  height: 96.5vh;
   width: 100%;
   border-radius: 10px;
 }
