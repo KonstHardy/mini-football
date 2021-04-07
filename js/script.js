@@ -83,7 +83,14 @@ ball.on("click", function () {
         rightPlayer++;
         score.innerText = leftPlayer + ":" + rightPlayer;
       }
-      setTimeout(() => alert("GOALLL !!!"));
+
+      //Show the "GOALLL !!!";
+      let timerId = setInterval(() => $("#goal").fadeIn(500).fadeOut(300), 500);
+
+      //Stop showing the "GOALLL !!!" after 1.5 seconds;
+      setTimeout(() => {
+        clearInterval(timerId);
+      }, 1500);
     }
   }
 });
