@@ -1,14 +1,11 @@
-# mini-football__jquery
-
-### Description
-
-Simple browser game of mini football with a score change built with jQuery.
-
-### Preview
+# [mini-football__jquery](https://konsthardy.github.io/mini-football__jquery/)
 
 ![Preview](./preview/preview.gif)
 
-## Live Demo
+## Preview
 
-Live Project URL: [mini-football__jquery](https://konsthardy.github.io/mini-football__jquery/)
+You can check out [live preview](https://konsthardy.github.io/mini-football__jquery/).
 
+## Quick Start
+
+Clone the repo `git clone https://github.com/KonstHardy/mini-football__jquery.git`
